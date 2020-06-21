@@ -12,120 +12,41 @@ import {
   Right,
   Button,
 } from "native-base";
-export default class ListThumbnailExample extends Component {
+import { getArticles } from "../../service/news";
+import DataItem from "./../../component/DataItem";
+import { ActivityIndicator, View } from "react-native";
+
+export default class TabScreen extends Component {
+  state = {
+    isLoading: true,
+    data: null,
+  };
+
+  componentDidMount() {
+    getArticles().then((data) => {
+      this.setState({
+        isLoading: false,
+        data,
+      });
+    });
+  }
   render() {
+    console.log(this.state.data);
+
+    let view = this.state.isLoading ? (
+      <View>
+        <ActivityIndicator animating={this.state.isLoading} />
+        <Text style={{marginLeft:"35%"}}>Please Wait.....</Text>
+      </View>
+    ) : (
+      <List
+        dataArray={this.state.data}
+        renderRow={(item) => <DataItem data={item} />}
+      />
+    );
     return (
       <Container>
-        <Content>
-          <List>
-            <ListItem thumbnail>
-              <Left>
-                <Thumbnail
-                  style={{ marginRight: "10%" }}
-                  square
-                  source={{
-                    uri: "https://picsum.photos/200/300",
-                  }}
-                />
-              </Left>
-              <Body style={{ marginLeft: 70 }}>
-                <Text>Sankhadeep</Text>
-                <Text numberOfLines={2}>
-                  Its time to build a difference . .
-                </Text>
-              </Body>
-              <Right>
-                <Button transparent>
-                  <Text>View</Text>
-                </Button>
-              </Right>
-            </ListItem>
-            <ListItem thumbnail>
-              <Left>
-                <Thumbnail
-                  square
-                  source={{
-                    uri: "https://picsum.photos/200/300",
-                  }}
-                />
-              </Left>
-              <Body style={{ marginLeft: 70 }}>
-                <Text>Sankhadeep</Text>
-                <Text note numberOfLines={2}>
-                  Its time to build a difference . .
-                </Text>
-              </Body>
-              <Right>
-                <Button transparent>
-                  <Text>View</Text>
-                </Button>
-              </Right>
-            </ListItem>
-            <ListItem thumbnail>
-              <Left>
-                <Thumbnail
-                  square
-                  source={{
-                    uri: "https://picsum.photos/200/300",
-                  }}
-                />
-              </Left>
-              <Body style={{ marginLeft: 70 }}>
-                <Text>Sankhadeep</Text>
-                <Text note numberOfLines={2}>
-                  Its time to build a difference . .
-                </Text>
-              </Body>
-              <Right>
-                <Button transparent>
-                  <Text>View</Text>
-                </Button>
-              </Right>
-            </ListItem>
-            <ListItem thumbnail>
-              <Left>
-                <Thumbnail
-                  square
-                  source={{
-                    uri: "https://picsum.photos/200/300",
-                  }}
-                />
-              </Left>
-              <Body style={{ marginLeft: 70 }}>
-                <Text>Sankhadeep</Text>
-                <Text note numberOfLines={2}>
-                  Its time to build a difference . .
-                </Text>
-              </Body>
-              <Right>
-                <Button transparent>
-                  <Text>View</Text>
-                </Button>
-              </Right>
-            </ListItem>
-            <ListItem thumbnail>
-              <Left>
-                <Thumbnail
-                  square
-                  source={{
-                    uri: "https://picsum.photos/200/300",
-                  }}
-                />
-              </Left>
-              <Body style={{ marginLeft: 70 }}>
-                <Text>Sankhadeep</Text>
-                <Text note numberOfLines={2}>
-                  Its time to build a difference . .
-                </Text>
-              </Body>
-              <Right>
-                <Button transparent>
-                  <Text>View</Text>
-                </Button>
-              </Right>
-            </ListItem>
-          </List>
-        </Content>
+        <Content>{view}</Content>
       </Container>
     );
   }
