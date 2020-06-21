@@ -21,14 +21,14 @@ export default class ListThumbnailExample extends Component {
             <ListItem thumbnail>
               <Left>
                 <Thumbnail
-                  style={{ marginRight:"10%"}}
+                  style={{ marginRight: "10%" }}
                   square
                   source={{
                     uri: "https://picsum.photos/200/300",
                   }}
                 />
               </Left>
-              <Body>
+              <Body style={{ marginLeft: 70 }}>
                 <Text>Sankhadeep</Text>
                 <Text numberOfLines={2}>
                   Its time to build a difference . .
@@ -49,7 +49,7 @@ export default class ListThumbnailExample extends Component {
                   }}
                 />
               </Left>
-              <Body>
+              <Body style={{ marginLeft: 70 }}>
                 <Text>Sankhadeep</Text>
                 <Text note numberOfLines={2}>
                   Its time to build a difference . .
@@ -70,7 +70,7 @@ export default class ListThumbnailExample extends Component {
                   }}
                 />
               </Left>
-              <Body>
+              <Body style={{ marginLeft: 70 }}>
                 <Text>Sankhadeep</Text>
                 <Text note numberOfLines={2}>
                   Its time to build a difference . .
@@ -91,7 +91,7 @@ export default class ListThumbnailExample extends Component {
                   }}
                 />
               </Left>
-              <Body>
+              <Body style={{ marginLeft: 70 }}>
                 <Text>Sankhadeep</Text>
                 <Text note numberOfLines={2}>
                   Its time to build a difference . .
@@ -112,7 +112,7 @@ export default class ListThumbnailExample extends Component {
                   }}
                 />
               </Left>
-              <Body>
+              <Body style={{ marginLeft: 70 }}>
                 <Text>Sankhadeep</Text>
                 <Text note numberOfLines={2}>
                   Its time to build a difference . .
