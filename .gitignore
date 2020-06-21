@@ -9,6 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
+src/config/rest_config.js
 
 # macOS
 .DS_Store
