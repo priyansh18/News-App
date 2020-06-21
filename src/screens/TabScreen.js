@@ -32,7 +32,7 @@ export default class TabsAdvancedExample extends Component {
             heading={
               <TabHeading>
                 <Icon name="camera" />
-                <Text>Camera</Text>
+                <Text>General</Text>
               </TabHeading>
             }
           >
@@ -42,7 +42,7 @@ export default class TabsAdvancedExample extends Component {
             tabStyle={{ backgroundColor: "#009387" }}
             heading={
               <TabHeading>
-                <Text>No Icon</Text>
+                <Text>Sports</Text>
               </TabHeading>
             }
           >
@@ -53,6 +53,7 @@ export default class TabsAdvancedExample extends Component {
             heading={
               <TabHeading>
                 <Icon name="apps" />
+                <Text>Technology</Text>
               </TabHeading>
             }
           >

@@ -9,6 +9,8 @@ import {
   Text,
   Button,
 } from "native-base";
+import { View } from "react-native";
+import Time from './Time';
 
 // create a component
 class DataItem extends Component {
@@ -19,7 +21,7 @@ class DataItem extends Component {
       <ListItem thumbnail>
         <Left>
           <Thumbnail
-            style={{ marginRight: "10%"}}
+            style={{ marginRight: "10%" }}
             square
             source={{
               uri:
@@ -29,11 +31,22 @@ class DataItem extends Component {
             }}
           />
         </Left>
-        <Body style={{ marginLeft: 70,marginRight:70 }}>
+        <Body style={{ marginLeft: 70, marginRight: 70 }}>
           <Text numberOfLines={2}>{value.title}</Text>
           <Text note numberOfLines={2}>
             {value.description}
           </Text>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              marginTop: 8,
+              marginLeft: 0,
+            }}
+          >
+            <Text>{value.source.name}</Text>
+            <Time time={value.publishedAt}/>
+          </View>
         </Body>
         <Right>
           <Button>

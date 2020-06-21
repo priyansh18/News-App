@@ -36,7 +36,7 @@ export default class TabScreen extends Component {
     let view = this.state.isLoading ? (
       <View>
         <ActivityIndicator animating={this.state.isLoading} />
-        <Text style={{marginLeft:"35%"}}>Please Wait.....</Text>
+        <Text style={{ marginLeft: "35%" }}>Please Wait.....</Text>
       </View>
     ) : (
       <List
