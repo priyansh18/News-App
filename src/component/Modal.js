@@ -1,6 +1,7 @@
 //import liraries
 import React, { Component } from "react";
-import { Dimensions, WebView, Modal, Share } from "react-native";
+import { Dimensions, Modal, Share, Text, View } from "react-native";
+import {WebView} from "react-native-webview";
 import {
   Container,
   Header,
@@ -13,13 +14,14 @@ import {
   Button,
 } from "native-base";
 
-const webViewHeight = Dimensions.get("window").height - 56;
+const webViewHeight = Dimensions.get("screen").height;
+const webViewWidth = Dimensions.get("screen").width - 40;
 
 // create a component
 class ModalComponent extends Component {
   handleShare = () => {
     const { url, title } = this.props.articleData;
-    message = `${title}\n\nRead More @${url}\n\nShared via News App`;
+    const message = `${title}\n\nRead More @${url}\n\nShared via News App`;
     return Share.share(
       { title, message, url: message },
       { dialogTitle: `Share ${title}` }
@@ -29,13 +31,14 @@ class ModalComponent extends Component {
   handleClose = () => {
     return this.props.onClose();
   };
+
   render() {
     const { showModal, articleData } = this.props;
-    const { url } = articleData;
-    console.log("Url", url);
+    const articles_url = articleData.url;
+    console.log("Url", articles_url);
     console.log("ShowModal", showModal);
     console.log("Article ", articleData);
-    if (url != undefined) {
+    if (articles_url != undefined) {
       return (
         <Modal
           animationType="slide"
@@ -43,8 +46,13 @@ class ModalComponent extends Component {
           visible={showModal}
           onRequestClose={this.handleClose}
         >
-          <Container style={{ margin: 15, marginBottom: 0 }}>
-            <Header style={{ backgroundColor: "#009387" }}>
+          <Container
+            style={{
+              margin: 0,
+              marginBottom: 0,
+            }}
+          >
+            <Header>
               <Left>
                 <Button transparent onPress={this.handleClose}>
                   <Icon name="close" style={{ color: "white", fontSize: 12 }} />
@@ -62,14 +70,16 @@ class ModalComponent extends Component {
                 </Button>
               </Right>
             </Header>
-            <Content contentContainerStyle={{ height: webViewHeight }}>
-              <WebView
-                source={{ uri: url }}
-                style={{ flex: 1 }}
-                onError={this.handleClose}
-                startInLoadingState
-                scalesPageToFit
-              />
+            <Content style={{ flex: 1 }}>
+              <View style={{ flex: 1, alignItems: "flex-end" }}>
+                <WebView
+                  source={{ uri: articles_url }}
+                  javaScriptEnabled={true}
+                  domStorageEnabled={true}
+                  startInLoadingState={true}
+                  scalesPageToFit={true}
+                />
+              </View>
             </Content>
           </Container>
         </Modal>

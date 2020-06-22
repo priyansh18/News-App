@@ -16,7 +16,7 @@ import { getArticles } from "../../service/news";
 import DataItem from "./../../component/DataItem";
 import { ActivityIndicator, View } from "react-native";
 // import Modal from "../../component/Modal";
-import ModalComponent from './../../component/Modal';
+import ModalComponent from "./../../component/Modal";
 
 export default class Tab1 extends Component {
   state = {
@@ -57,24 +57,29 @@ export default class Tab1 extends Component {
         <Text style={{ marginLeft: "35%" }}>Please Wait.....</Text>
       </View>
     ) : (
-      <List
-        dataArray={this.state.data}
-        renderRow={(item) => (
-          <DataItem onPress={this.handleItemDataonPress} data={item} />
-        )}
-      />
+      <View style={{ position: "relative" }}>
+        <List
+          dataArray={this.state.data}
+          renderRow={(item) => (
+            <DataItem
+              onPress={this.handleItemDataonPress}
+              data={item}
+              style={{ position: "absolute", left: 0, right: 0 }}
+            />
+          )}
+        />
+        <ModalComponent
+          style={{ position: "relative", left: 0, right: 0 }}
+          showModal={this.state.setModalVisible}
+          articleData={this.state.modalArticleData}
+          onClose={this.handleModalClose}
+        />
+      </View>
     );
     return (
-        <Container>
-          <Content>
-            {view}
-            <ModalComponent
-              showModal={this.state.setModalVisible}
-              articleData={this.state.modalArticleData}
-              onClose={this.handleModalClose}
-            />
-          </Content>
-        </Container>
+      <Container>
+        <Content>{view}</Content>
+      </Container>
     );
   }
 }

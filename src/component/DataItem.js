@@ -16,7 +16,7 @@ import Time from "./Time";
 class DataItem extends Component {
   handlePress = () => {
     const { url, title } = this.props.data;
-    console.log("URL",url);
+    console.log("URL", url);
     return this.props.onPress({ url, title });
   };
   render() {
