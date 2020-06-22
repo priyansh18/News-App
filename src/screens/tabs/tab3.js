@@ -1,27 +1,80 @@
-//import liraries
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import {
+  Container,
+  Header,
+  Content,
+  List,
+  ListItem,
+  Thumbnail,
+  Text,
+  Left,
+  Body,
+  Right,
+  Button,
+} from "native-base";
+import { getArticles } from "../../service/news";
+import DataItem from "./../../component/DataItem";
+import { ActivityIndicator, View } from "react-native";
+// import Modal from "../../component/Modal";
+import ModalComponent from './../../component/Modal';
 
-// create a component
-class Tab3 extends Component {
+export default class Tab3 extends Component {
+  state = {
+    isLoading: true,
+    data: null,
+    setModalVisible: false,
+    modalArticleData: {},
+  };
+
+  handleItemDataonPress = (articleData) => {
+    this.setState({
+      setModalVisible: true,
+      modalArticleData: articleData,
+    });
+  };
+
+  handleModalClose = () => {
+    this.setState({
+      setModalVisible: false,
+      modalArticleData: {},
+    });
+  };
+
+  componentDidMount() {
+    getArticles('technology').then((data) => {
+      this.setState({
+        isLoading: false,
+        data,
+      });
+    });
+  }
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Tab3</Text>
+    console.log(this.state.data);
+
+    let view = this.state.isLoading ? (
+      <View>
+        <ActivityIndicator animating={this.state.isLoading} />
+        <Text style={{ marginLeft: "35%" }}>Please Wait.....</Text>
       </View>
+    ) : (
+      <List
+        dataArray={this.state.data}
+        renderRow={(item) => (
+          <DataItem onPress={this.handleItemDataonPress} data={item} />
+        )}
+      />
+    );
+    return (
+        <Container>
+          <Content>
+            {view}
+            <ModalComponent
+              showModal={this.state.setModalVisible}
+              articleData={this.state.modalArticleData}
+              onClose={this.handleModalClose}
+            />
+          </Content>
+        </Container>
     );
   }
 }
-
-// define your styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#2c3e50",
-  },
-});
-
-//make this component available to the app
-export default Tab3;

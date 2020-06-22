@@ -15,7 +15,7 @@ import {
 import Tab1 from "./tabs/tab1";
 import Tab2 from "./tabs/tab2";
 import Tab3 from "./tabs/tab3";
-export default class TabsAdvancedExample extends Component {
+export default class TabsScreen extends Component {
   render() {
     return (
       <Container>
